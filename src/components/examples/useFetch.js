@@ -8,6 +8,14 @@ export const useFetch = (url) => {
     });
 
     useEffect(() => {
+        // Para que cada vez que cargue un quote nuevo muestre el mensaje de loading,
+        // vuelvo a setear el state
+        setState({
+            data: null,
+            loading: true,
+            error: null
+        });
+
         fetch(url)
             .then((resp) => resp.json())
             .then((data) => {
