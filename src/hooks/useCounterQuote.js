@@ -9,7 +9,7 @@ export const useCounterQuote = (initialState = 1) => {
     };
 
     const decrement = () => {
-        setCounter(counter - 1);
+        counter > 1 ? setCounter(counter - 1) : setCounter(1);
     };
 
     const reset = () => {
