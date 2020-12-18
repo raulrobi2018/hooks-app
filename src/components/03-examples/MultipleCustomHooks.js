@@ -15,7 +15,7 @@ export const MultipleCustomHooks = () => {
     const {author, quote} = !!data && data[0];
     return (
         <>
-            <h1>BrakingBad Quotes</h1>
+            <h4>BrakingBad Quotes</h4>
             <hr />
 
             {loading ? (
