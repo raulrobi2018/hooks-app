@@ -22,7 +22,6 @@ export const Padre = () => {
             {numeros.map((n) => (
                 <Hijo key={n} numero={n} incrementar={incrementar} />
             ))}
-            {/* <Hijo /> */}
         </div>
     );
 };
