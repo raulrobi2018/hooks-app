@@ -5,3 +5,7 @@ body {
 button {
     margin-left: 10px;
 }
+
+.complete {
+    text-decoration: line-through;
+}
