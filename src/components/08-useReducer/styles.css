@@ -9,3 +9,7 @@ button {
 .complete {
     text-decoration: line-through;
 }
+
+.item {
+    cursor: pointer;
+}

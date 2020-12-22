@@ -6,13 +6,31 @@ import {todoReducer} from "./todoReducer";
 const initialState = [
     {
         id: new Date().getTime(),
-        todo: "Buy bread",
+        desc: "Buy bread",
         done: false
     }
 ];
 
 export const TodoApp = () => {
-    const [todoList] = useReducer(todoReducer, initialState);
+    const [todoList, dispatch] = useReducer(todoReducer, initialState);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const newTodo = {
+            id: new Date().getTime(),
+            desc: "Go to the supermarket",
+            done: false
+        };
+
+        const action = {
+            type: "add",
+            payload: newTodo
+        };
+
+        // El dispatch será el encargado de cambiar el estado
+        // con la información recibida en el payload
+        dispatch(action);
+    };
 
     return (
         <>
@@ -35,7 +53,11 @@ export const TodoApp = () => {
                         ></input>
                     </div>
                     <div className="col">
-                        <button className="btn btn-success btn-block">
+                        <button
+                            className="btn btn-success btn-block"
+                            type="submit"
+                            onClick={handleSubmit}
+                        >
                             Add
                         </button>
                     </div>
@@ -46,9 +68,9 @@ export const TodoApp = () => {
 
             {todoList.map((t, i) => {
                 return (
-                    <div key={t.id} className="row">
-                        <div className="col-10 text-left">
-                            {i + 1} - {t.todo}
+                    <div key={t.id} className="row mb-2">
+                        <div className="col-10 text-left item">
+                            {i + 1} - {t.desc}
                         </div>
                         <div className="col-2">
                             <button className="btn btn-danger">Delete</button>
