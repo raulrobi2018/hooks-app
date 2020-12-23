@@ -57,6 +57,13 @@ export const TodoApp = () => {
         dispatch(action);
     };
 
+    const handleToggle = (todoId) => {
+        dispatch({
+            type: "toggle",
+            payload: todoId
+        });
+    };
+
     return (
         <>
             <h1>TODO Reducer</h1>
@@ -96,7 +103,14 @@ export const TodoApp = () => {
             {todoList.map((t, i) => {
                 return (
                     <div key={t.id} className="row mb-2">
-                        <div className="col-10 text-left item">
+                        <div
+                            className={`${
+                                t.done
+                                    ? "col-10 text-left item complete"
+                                    : "col-10 text-left item"
+                            }`}
+                            onClick={() => handleToggle(t.id)}
+                        >
                             {i + 1} - {t.desc}
                         </div>
                         <div className="col-2">
