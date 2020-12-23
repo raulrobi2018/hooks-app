@@ -12,8 +12,10 @@ const init = () => {
 };
 
 export const TodoApp = () => {
+    // El todoReducer se encarga de modificar el estado y lo tomamos en 'todoList'
     // La función init sirve para que el reducer no se esté ejecutando cada vez que se
     // renderiza el componente. En este caso lo que hacía el 'initialState' lo pasamos al init
+    // Adicionalmente el useReducer provee la función 'dispatch' que permitirá ejecutar una acción
     const [todoList, dispatch] = useReducer(todoReducer, [], init);
 
     // Utilizo mi custom hook definido en el archivo useForm.js
@@ -44,6 +46,15 @@ export const TodoApp = () => {
         // con la información recibida en el payload
         dispatch(action);
         reset();
+    };
+
+    const handleDelete = (todoId) => {
+        const action = {
+            type: "delete",
+            payload: todoId
+        };
+
+        dispatch(action);
     };
 
     return (
@@ -89,7 +100,13 @@ export const TodoApp = () => {
                             {i + 1} - {t.desc}
                         </div>
                         <div className="col-2">
-                            <button className="btn btn-danger">Delete</button>
+                            <button
+                                className="btn btn-danger"
+                                onClick={() => handleDelete(t.id)}
+                                type="button"
+                            >
+                                Delete
+                            </button>
                         </div>
                     </div>
                 );
