@@ -1,130 +1,118 @@
-import React, {useEffect, useReducer} from "react";
-import {useForm} from "../../hooks/useForm";
+import React, { useEffect, useReducer } from "react";
+import { useForm } from "../../hooks/useForm";
 
 import "./styles.css";
-import {todoReducer} from "./todoReducer";
+import { TodoList } from "./TodoList";
+import { todoReducer } from "./todoReducer";
 
 // Inicializa el initialState
 const init = () => {
-    // Inicializo con los TODO's que estén guardados en el localstorage
-    // Si no hay, el JSON.parse retorna 'null' y devolvemos un array vacío
-    return JSON.parse(localStorage.getItem("todos")) || [];
+  // Inicializo con los TODO's que estén guardados en el localstorage
+  // Si no hay, el JSON.parse retorna 'null' y devolvemos un array vacío
+  return JSON.parse(localStorage.getItem("todos")) || [];
 };
 
 export const TodoApp = () => {
-    // El todoReducer se encarga de modificar el estado y lo tomamos en 'todoList'
-    // La función init sirve para que el reducer no se esté ejecutando cada vez que se
-    // renderiza el componente. En este caso lo que hacía el 'initialState' lo pasamos al init
-    // Adicionalmente el useReducer provee la función 'dispatch' que permitirá ejecutar una acción
-    const [todoList, dispatch] = useReducer(todoReducer, [], init);
+  // El todoReducer se encarga de modificar el estado y lo tomamos en 'todoList'
+  // La función init sirve para que el reducer no se esté ejecutando cada vez que se
+  // renderiza el componente. En este caso lo que hacía el 'initialState' lo pasamos al init
+  // Adicionalmente el useReducer provee la función 'dispatch' que permitirá ejecutar una acción
+  const [todoList, dispatch] = useReducer(todoReducer, [], init);
 
-    // Utilizo mi custom hook definido en el archivo useForm.js
-    // Extraigo la descripción del estado devuelto y la función que deseo manejar
-    const [{description}, {handleInputChange, reset}] = useForm({
-        description: ""
+  // Utilizo mi custom hook definido en el archivo useForm.js
+  // Extraigo la descripción del estado devuelto y la función que deseo manejar
+  const [{ description }, { handleInputChange, reset }] = useForm({
+    description: ""
+  });
+
+  // Cuando la lista de TODO's tenga cualquier cambio; agrego, elimino o modifico en el localStorage
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todoList));
+  }, [todoList]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newTodo = {
+      id: new Date().getTime(),
+      desc: description,
+      done: false
+    };
+
+    const action = {
+      type: "add",
+      payload: newTodo
+    };
+
+    // El dispatch será el encargado de cambiar el estado
+    // con la información recibida en el payload
+    dispatch(action);
+    reset();
+  };
+
+  const handleDelete = (todoId) => {
+    const action = {
+      type: "delete",
+      payload: todoId
+    };
+
+    dispatch(action);
+  };
+
+  const handleToggle = (todoId) => {
+    dispatch({
+      type: "toggle",
+      payload: todoId
     });
+  };
 
-    // Cuando la lista de TODO's tenga cualquier cambio; agrego, elimino o modifico en el localStorage
-    useEffect(() => {
-        localStorage.setItem("todos", JSON.stringify(todoList));
-    }, [todoList]);
+  return (
+    <>
+      <h1>TODO Reducer</h1>
+      <hr />
+      <div className="row mb-3">
+        <div className="col">
+          <strong>Number of TODO's: </strong> {todoList.length}
+        </div>
+      </div>
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const newTodo = {
-            id: new Date().getTime(),
-            desc: description,
-            done: false
-        };
-
-        const action = {
-            type: "add",
-            payload: newTodo
-        };
-
-        // El dispatch será el encargado de cambiar el estado
-        // con la información recibida en el payload
-        dispatch(action);
-        reset();
-    };
-
-    const handleDelete = (todoId) => {
-        const action = {
-            type: "delete",
-            payload: todoId
-        };
-
-        dispatch(action);
-    };
-
-    const handleToggle = (todoId) => {
-        dispatch({
-            type: "toggle",
-            payload: todoId
-        });
-    };
-
-    return (
-        <>
-            <h1>TODO Reducer</h1>
-            <hr />
-            <div className="row mb-3">
-                <div className="col">
-                    <strong>Number of TODO's: </strong> {todoList.length}
-                </div>
+      <form className="mb-3">
+        <div className="row">
+          <div className="col-8">
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">
+                Description
+              </span>
+              <input
+                type="text"
+                className="form-control"
+                aria-label="Description"
+                aria-describedby="basic-addon1"
+                name="description"
+                autoComplete="off"
+                onChange={handleInputChange}
+                value={description}
+              />
             </div>
+          </div>
+          <div className="col-2">
+            <button
+              className="btn btn-success btn-block"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </form>
 
-            <form className="mb-3">
-                <div className="row">
-                    <div className="col-8">
-                        <input
-                            type="text"
-                            name="description"
-                            placeholder="Description..."
-                            autoComplete="off"
-                            onChange={handleInputChange}
-                            value={description}
-                        ></input>
-                    </div>
-                    <div className="col-2">
-                        <button
-                            className="btn btn-success btn-block"
-                            type="submit"
-                            onClick={handleSubmit}
-                        >
-                            Add
-                        </button>
-                    </div>
-                </div>
-            </form>
+      <hr />
 
-            <hr />
-
-            {todoList.map((t, i) => {
-                return (
-                    <div key={t.id} className="row mb-2">
-                        <div
-                            className={`${
-                                t.done
-                                    ? "col-10 text-left item complete"
-                                    : "col-10 text-left item"
-                            }`}
-                            onClick={() => handleToggle(t.id)}
-                        >
-                            {i + 1} - {t.desc}
-                        </div>
-                        <div className="col-2">
-                            <button
-                                className="btn btn-danger"
-                                onClick={() => handleDelete(t.id)}
-                                type="button"
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                );
-            })}
-        </>
-    );
+      <TodoList
+        todoList={todoList}
+        handleDelete={handleDelete}
+        handleToggle={handleToggle}
+      />
+    </>
+  );
 };
