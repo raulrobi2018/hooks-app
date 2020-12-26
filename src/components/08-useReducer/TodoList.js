@@ -1,21 +1,18 @@
 import React from "react";
-import { TodoItem } from "./TodoItem";
+import {TodoItem} from "./TodoItem";
 
-export const TodoList = (todoList, handleDelete, handleToggle) => {
-  console.log(todoList);
-  return (
-    <>
-      {todoList.map((t, i) => {
-        return (
-          <TodoItem
-            todo={t}
-            index={i}
-            handleDelete={handleDelete}
-            handleToggle={handleToggle}
-          />
-        );
-      })}
-      ;
-    </>
-  );
+export const TodoList = ({todoList, handleDelete, handleToggle}) => {
+    return (
+        <>
+            {todoList.map((t, i) => (
+                <TodoItem
+                    key={t.id}
+                    todo={t}
+                    index={i}
+                    handleDelete={handleDelete}
+                    handleToggle={handleToggle}
+                />
+            ))}
+        </>
+    );
 };
