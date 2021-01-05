@@ -1,5 +1,4 @@
 import React, {useEffect, useReducer} from "react";
-import {useForm} from "../../hooks/useForm";
 
 import "./styles.css";
 import {TodoAdd} from "./TodoAdd";
@@ -30,25 +29,6 @@ export const TodoApp = () => {
             type: "add",
             payload: todo
         });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const newTodo = {
-            id: new Date().getTime(),
-            desc: description,
-            done: false
-        };
-
-        const action = {
-            type: "add",
-            payload: newTodo
-        };
-
-        // El dispatch será el encargado de cambiar el estado
-        // con la información recibida en el payload
-        dispatch(action);
-        reset();
     };
 
     const handleDelete = (todoId) => {
