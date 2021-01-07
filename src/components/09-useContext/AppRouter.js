@@ -15,16 +15,19 @@ export const AppRouter = () => {
         <Router>
             <div>
                 <NavBar />
-                <Switch>
-                    <Route exact path="/" component={HomeScreen} />
-                    <Route exact path="/about" component={AboutScreen} />
-                    <Route exact path="/login" component={LoginScreen} />
 
-                    {/* Si ingresan una ruta que no existe, entra aquí y redirecciona a / (barra).
+                <div className="container">
+                    <Switch>
+                        <Route exact path="/" component={HomeScreen} />
+                        <Route exact path="/about" component={AboutScreen} />
+                        <Route exact path="/login" component={LoginScreen} />
+
+                        {/* Si ingresan una ruta que no existe, entra aquí y redirecciona a / (barra).
                      También se puede crear una página 404 y poner otro Route al final que direccione
                      a esa página */}
-                    <Redirect to="/" />
-                </Switch>
+                        <Redirect to="/" />
+                    </Switch>
+                </div>
             </div>
         </Router>
     );
