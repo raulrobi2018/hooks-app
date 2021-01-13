@@ -34,8 +34,8 @@ describe("Testing useFetch", () => {
         await waitForNextUpdate();
         const {data, loading, error} = result.current;
 
-        expect(data.length).toBe(1);
+        expect(data).toBe(null);
         expect(loading).toBe(false);
-        expect(error).toBe(null);
+        expect(error).toBe("No se pudo cargar la info");
     });
 });
