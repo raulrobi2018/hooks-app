@@ -13,8 +13,9 @@ export const MultipleCustomHooks = () => {
     // !!data: conviente el null a un booleano y lo niega. !data lo convierte a booleano y luego !!data lo niega
     // Si es true, devuelve data[0]
     const {author, quote} = !!data && data[0];
+
     return (
-        <>
+        <div>
             <h4>BrakingBad Quotes</h4>
             <hr />
 
@@ -55,6 +56,6 @@ export const MultipleCustomHooks = () => {
                     </button>
                 </div>
             </div>
-        </>
+        </div>
     );
 };

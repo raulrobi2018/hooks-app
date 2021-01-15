@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing MultipleCustomHooks should display correctly 1`] = `
+<div>
+  <h4>
+    BrakingBad Quotes
+  </h4>
+  <hr />
+  <div
+    className="alert alert-info text-center"
+  >
+    Loading...
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="col-4"
+    >
+      <button
+        className="btn btn-secondary"
+        onClick={[Function]}
+      >
+        Previous quote
+      </button>
+    </div>
+    <div
+      className="col-4"
+    >
+      <button
+        className="btn btn-primary ml-1"
+        onClick={[Function]}
+      >
+        Next quote
+      </button>
+    </div>
+    <div
+      className="col-4"
+    >
+      <button
+        className="btn btn-success ml-1"
+        onClick={[Function]}
+      >
+        Reset
+      </button>
+    </div>
+  </div>
+</div>
+`;

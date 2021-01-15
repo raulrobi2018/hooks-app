@@ -1,7 +1,7 @@
 import {useState} from "react";
 
 // initialState con valor por defecto de 10
-export const useCounterQuote = (initialState = 1) => {
+export const useCounterQuote = (initialState = 10) => {
     const [counter, setCounter] = useState(initialState);
 
     const increment = () => {
