@@ -18,4 +18,14 @@ describe("Testing todoReducer", () => {
         //El nuevo state debe ser igual a todos los todos que habían más el nuevo todo
         expect(state).toEqual([...demoTodos, newTodo]);
     });
+    test("should delete a todo", () => {
+        const state = todoReducer(demoTodos, {type: "delete", payload: 1});
+        //Solo debe de quedar el primero, o sea el de la posición 1
+        expect(state).toEqual([demoTodos[1]]);
+    });
+    test("should toggle the todo", () => {
+        const state = todoReducer(demoTodos, {type: "toggle", payload: 1});
+        //El valor del done del elemento debe ser true
+        expect(state[0].done).toBe(true);
+    });
 });
