@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing todoItem component should display the component correctly 1`] = `
+<div
+  className="row mb-2"
+>
+  <div
+    className="col-10 text-left item"
+    id="toggle"
+    onClick={[Function]}
+  >
+    1
+     - 
+    Learn React
+  </div>
+  <div
+    className="col-2"
+  >
+    <button
+      className="btn btn-danger"
+      onClick={[Function]}
+      type="button"
+    >
+      Delete
+    </button>
+  </div>
+</div>
+`;
