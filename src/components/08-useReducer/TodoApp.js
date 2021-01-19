@@ -52,7 +52,7 @@ export const TodoApp = () => {
             <h1>TODO Reducer</h1>
             <hr />
             <div className="row mb-3">
-                <div className="col">
+                <div className="col" id="numElements">
                     <strong>Number of TODO's: </strong> {todoList.length}
                 </div>
             </div>

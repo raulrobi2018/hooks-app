@@ -1,6 +1,5 @@
 import {shallow} from "enzyme";
 import {TodoAdd} from "../../../components/08-useReducer/TodoAdd";
-import {demoTodos} from "../../resources/demoTodos";
 
 describe("Testing TodoAdd", () => {
     const addTodo = jest.fn();
