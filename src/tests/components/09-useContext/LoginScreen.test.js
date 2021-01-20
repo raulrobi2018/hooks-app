@@ -3,10 +3,10 @@ import {LoginScreen} from "../../../components/09-useContext/LoginScreen";
 import {UserContext} from "../../../components/09-useContext/UserContext";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 
-describe("Testing LoginScreen", () => {
-    //Configuración necesaria para que funcione mount con React 17
-    configure({adapter: new Adapter()});
+//Configuración necesaria para que funcione mount con React 17
+configure({adapter: new Adapter()});
 
+describe("Testing LoginScreen", () => {
     const setUser = jest.fn();
     const user = {
         id: 1,
